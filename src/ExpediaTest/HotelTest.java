@@ -1,5 +1,7 @@
 package ExpediaTest;
 
+import static org.junit.Assert.*;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -87,6 +89,29 @@ public class HotelTest
         //mocks.VerifyAll();
         EasyMock.verify(mockDB);
     }
+	 @Test
+	 public void TestThatHotelDoesGetRoomCountFromDatabase()
+	 {
+		  IDatabase mockDB = EasyMock.createMock(IDatabase.class);
+		  List<String> Rooms = new LinkedList<String>();
+		  for (int i = 0; i < 100; i++)
+		  {
+			  Rooms.add(String.valueOf(i));
+		  }
+		  EasyMock.replay(mockDB);
+		  mockDB.Rooms = Rooms;
+		  Hotel target = new Hotel(10);
+		  target.Database = mockDB;
+		  assertEquals(Rooms.size(), target.AvailableRooms());
+		  EasyMock.verify(mockDB);
+	 }
+	
+	 @Test
+	 public void TestGetMiles()
+	 {
+		 Hotel target = new Hotel(5);
+		 assertEquals(0, target.getMiles());
+	 }
 //    @Test
 //    public void TestThatHotelDoesGetRoomCountFromDatabase()
 //    {
