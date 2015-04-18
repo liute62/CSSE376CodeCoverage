@@ -96,8 +96,9 @@ public class UserTest
 	{
 		Car car = new Car(5);
 		Flight flight = new Flight(StartDate, EndDate, 10000);
-		target.bookWithDoubleMiles(new Booking[]{flight});
-		Assert.assertEquals(5000, target.bonusFrequentFlierMiles, 0.01);
+		Flight flight2 = new Flight(StartDate, EndDate, 3000);
+		target.bookWithDoubleMiles(new Booking[]{flight,flight2});
+		Assert.assertEquals(8000, target.bonusFrequentFlierMiles, 0.01);
 	}
 
 	
